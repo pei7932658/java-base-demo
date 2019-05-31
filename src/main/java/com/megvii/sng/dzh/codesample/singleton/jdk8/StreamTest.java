@@ -29,6 +29,13 @@ public class StreamTest {
         //-------------------------------------------------------filter new-------------------------------------------------------//
 //        List<PersonModel> temList = newList.stream().filter(person -> "男".equals(person.getSex())).filter(person -> person.getAge() >= 20).collect(Collectors.toList());
 //        System.out.println(temList.size());
+        PersonModel pm = new PersonModel();
+
+        list.stream().forEach(p->{
+                pm.setAge(pm.getAge()==null?0:pm.getAge()+2);
+        });
+        System.out.println(pm);
+
 
         //-------------------------------------------------------map-------------------------------------------------------//
 //        List<String> collect = list.stream().map(p ->p.getEnName()).collect(Collectors.toList());

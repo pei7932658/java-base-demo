@@ -9,7 +9,7 @@ public class Recv {
 	//队列名称
 		private final static String QUEUE_NAME = "hello";
 
-		public static void main(String[] argv) throws java.io.IOException,java.lang.InterruptedException
+		public static void main(String[] argv) throws Exception
 		{
 			//打开连接和创建频道，与发送端一样
 			ConnectionFactory factory = new ConnectionFactory();

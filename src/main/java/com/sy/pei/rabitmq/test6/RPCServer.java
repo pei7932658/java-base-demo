@@ -41,13 +41,13 @@ public class RPCServer {
 				QueueingConsumer.Delivery delivery = consumer.nextDelivery();
 
 				BasicProperties props = delivery.getProperties();
-				
+
 //				BasicProperties replyProps = new BasicProperties();
 //				replyProps.setCorrelationId(props.getCorrelationId());
-				BasicProperties replyProps = new BasicProperties.Builder()  
-			            .correlationId(props.getCorrelationId())    
-			            .build() ;  
-				
+				BasicProperties replyProps = new BasicProperties.Builder()
+			            .correlationId(props.getCorrelationId())
+			            .build() ;
+
 				try {
 					String message = new String(delivery.getBody(), "UTF-8");
 					int n = Integer.parseInt(message);
@@ -60,9 +60,9 @@ public class RPCServer {
 				} finally {
 					//将结果返回到客户端Queue
 					channel.basicPublish("", props.getReplyTo(), replyProps,response.getBytes("UTF-8"));
-					 //向客户端确认消息  
+					 //向客户端确认消息
 					channel.basicAck(delivery.getEnvelope().getDeliveryTag(),false);
-					System.out.println("服务端返回消息完成.."); 
+					System.out.println("服务端返回消息完成..");
 				}
 			}
 		} catch (Exception e) {

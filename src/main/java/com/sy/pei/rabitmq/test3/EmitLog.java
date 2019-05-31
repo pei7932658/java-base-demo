@@ -2,6 +2,7 @@ package com.sy.pei.rabitmq.test3;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.concurrent.TimeoutException;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -15,7 +16,12 @@ public class EmitLog {
 		// 创建连接和频道
 		ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost("localhost");
-		Connection connection = factory.newConnection();
+		Connection connection = null;
+		try {
+			connection = factory.newConnection();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
 		Channel channel = connection.createChannel();
 		// 声明转发器和类型
 		channel.exchangeDeclare(EXCHANGE_NAME, "fanout" );
@@ -26,7 +32,11 @@ public class EmitLog {
 
 		System.out.println(" [x] Sent '" + message + "'");
 
-		channel.close();
+		try {
+			channel.close();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
 		connection.close();
 
 	}

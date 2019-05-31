@@ -10,7 +10,7 @@ import com.rabbitmq.client.MessageProperties;
 public class NewTask {
 	//队列名称
 
-		public static void main(String[] args) throws IOException
+		public static void main(String[] args) throws Exception
 		{
 			//创建连接和频道
 			ConnectionFactory factory = new ConnectionFactory();

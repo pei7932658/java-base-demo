@@ -8,7 +8,7 @@ public class Send {
 	//队列名称
 		private final static String QUEUE_NAME = "hello";
 
-		public static void main(String[] argv) throws java.io.IOException
+		public static void main(String[] argv) throws Exception
 		{
 			/**
 			 * 创建连接连接到MabbitMQ

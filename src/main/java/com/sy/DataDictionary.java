@@ -1,13 +1,13 @@
 package com.sy;
 
+import com.alibaba.fastjson.JSON;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
-
-import com.caifanfan.common.json.JsonUtil;
 
 public class DataDictionary {
 	private static Map<String,Object> data = new HashMap<String,Object>();
@@ -446,7 +446,7 @@ public class DataDictionary {
 	
 	public static void main(String[] args) {
 //		System.out.println(JSON.toJSONString(DataDictionary.data));
-		System.out.println(JsonUtil.objectToJson(DataDictionary.data));
+		System.out.println(JSON.toJSONString(DataDictionary.data));
 		File file = new File("D:\\dataJson.json");
 		if(file.exists()){
 			file.delete();
@@ -454,7 +454,7 @@ public class DataDictionary {
 		FileWriter fw;
 		try {
 			fw = new FileWriter(file);
-			fw.write(JsonUtil.objectToJson(DataDictionary.data));
+			fw.write(JSON.toJSONString(DataDictionary.data));
 			fw.flush();
 			fw.close();
 		} catch (IOException e) {

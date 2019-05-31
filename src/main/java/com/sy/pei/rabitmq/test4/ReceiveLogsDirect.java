@@ -11,7 +11,7 @@ public class ReceiveLogsDirect {
 	private static final String EXCHANGE_NAME = "ex_logs_direct";
 	private static final String[] SEVERITIES = { "info", "warning", "error" };
 
-	public static void main(String[] argv) throws java.io.IOException,
+	public static void main(String[] argv) throws Exception,
 			java.lang.InterruptedException
 	{
 		// 创建连接和频道

@@ -8,7 +8,7 @@ import com.rabbitmq.client.QueueingConsumer;
 public class ReceiveLogsToConsole {
 	private final static String EXCHANGE_NAME = "ex_log";
 
-	public static void main(String[] argv) throws java.io.IOException,
+	public static void main(String[] argv) throws Exception,
 			java.lang.InterruptedException
 	{
 		// 创建连接和频道

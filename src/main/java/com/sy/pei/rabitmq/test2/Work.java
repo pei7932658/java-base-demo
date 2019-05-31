@@ -8,7 +8,7 @@ import com.rabbitmq.client.QueueingConsumer;
 public class Work {
 	//队列名称
 
-		public static void main(String[] argv) throws java.io.IOException,
+		public static void main(String[] argv) throws Exception,
 				java.lang.InterruptedException
 		{
 			//区分不同工作进程的输出
