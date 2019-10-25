@@ -24,7 +24,8 @@ public class Prototype implements Cloneable,Serializable{
 		Prototype po = (Prototype)super.clone();
 		return po;
 	}
-	
+
+	//深复制
 	public Prototype deepClone() throws IOException, ClassNotFoundException{
 		 /* 写入当前对象的二进制流 */  
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -34,6 +35,10 @@ public class Prototype implements Cloneable,Serializable{
 		/* 读出二进制流产生的新对象 */
 		ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
 		ObjectInputStream ois = new ObjectInputStream(bis);
+
+		oos.close();
+		bos.close();
+
 		return (Prototype)ois.readObject();
 	}
 	

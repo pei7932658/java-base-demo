@@ -3,6 +3,7 @@ package com.megvii.sng.dzh.codesample.singleton.jdk8.optional;
 import lombok.Data;
 import org.junit.Assert;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**
@@ -26,8 +27,8 @@ public class OptionalTest {
         //-------------------------------------------------------isPresent ifPresent-------------------------------------------------------//
         //        User u = User.of(null, null);//构造方法
 //        User u = null;
-////        User u = User.of("peter", 23);//构造方法
-////        Assert.assertEquals("peter", u.getName());
+//        User u = User.of(null, 23);//构造方法
+//        Assert.assertEquals("peter", u.getName());
 //        Optional<User> up = Optional.ofNullable(u);
 //        System.out.println("对象是否存在:" + up.isPresent());
 //        up.ifPresent(user -> System.out.println("ifPresent 判断不为空，执行里面在的Consumer:" + user.getName()));
@@ -35,8 +36,8 @@ public class OptionalTest {
 
         //-------------------------------------------------------orElse orElseGet-------------------------------------------------------//
 //        User u = null;
-//        User u = User.of("peter", 23);//构造方法
-//        User user = Optional.ofNullable(u).orElse(createNewUser("orElse"));//当对象不为空时，orElse 里面的方法会调用
+        User u = User.of("peter", 23);//构造方法
+        User user = Optional.ofNullable(u).orElse(createNewUser("orElse"));//当对象不为空时，orElse 里面的方法会调用
 //        User user2 = Optional.ofNullable(u).orElseGet(()->createNewUser("orElseGet"));//当对象不为空时，orElseGet 不会调用
 
 
@@ -46,7 +47,7 @@ public class OptionalTest {
 
 
         //-------------------------------------------------------转换值 map flatMap filter-------------------------------------------------------//
-        User u =null;
+//        User u =null;
 //        User u = User.of("peter", 23);
         //map 无限级联，可以往一直班下走
 //        String result = Optional.ofNullable(u).map(user -> user.getName()).map(name -> name.toUpperCase()).orElse("map");
@@ -55,10 +56,10 @@ public class OptionalTest {
 //        String result2 = Optional.ofNullable(u).flatMap(user->user.getPosition()).orElse("flatMap");//flatMap 可以对Optional 进行解包
 //        System.out.println(result2);
 
-        User uFilter = User.of("peter@", 23);
-        Optional<User> op = Optional.ofNullable(uFilter).filter(user->user.getName()!=null && user.getName().contains("@"));//filter 接收一个断言，如果满足返回true 返回，如果不满足返回false时返回一个空的Optional
-        Assert.assertTrue(op.isPresent());
-        System.out.println(op.get());
+//        User uFilter = User.of("peter@", 23);
+//        Optional<User> op = Optional.ofNullable(uFilter).filter(user->user.getName()!=null && user.getName().contains("@"));//filter 接收一个断言，如果满足返回true 返回，如果不满足返回false时返回一个空的Optional
+//        Assert.assertTrue(op.isPresent());
+//        System.out.println(op.get());
 
     }
 

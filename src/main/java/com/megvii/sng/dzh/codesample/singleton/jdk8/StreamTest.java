@@ -32,9 +32,11 @@ public class StreamTest {
         PersonModel pm = new PersonModel();
 
         list.stream().forEach(p->{
-                pm.setAge(pm.getAge()==null?0:pm.getAge()+2);
+                //pm.setAge(pm.getAge()==null?0:pm.getAge()+2);
+            p.setAge(11);
         });
-        System.out.println(pm);
+
+        System.out.println(list);
 
 
         //-------------------------------------------------------map-------------------------------------------------------//
@@ -112,22 +114,22 @@ public class StreamTest {
 //        ));
 
         //-------------------------------------------------------optional-------------------------------------------------------//
-        PersonModel p = new PersonModel();
-        Optional<PersonModel> o = Optional.of(p);
-        System.out.println(o.isPresent()?o.get():"-");
-
-        Optional<String> name = Optional.ofNullable(p.getEnName());
-        System.out.println(name.isPresent()?name.get():"-");
-
-        Optional.ofNullable("test").ifPresent(na->{
-            System.out.println(na+" ifPresent");
-        });
-
-        System.out.println(Optional.ofNullable(null).orElse("-"));
-        System.out.println(Optional.ofNullable("1").orElse("-"));
-
-        boolean b = Optional.ofNullable(p).map(PersonModel::getEnName).isPresent();
-        System.out.println(b);
+//        PersonModel p = new PersonModel();
+//        Optional<PersonModel> o = Optional.of(p);
+//        System.out.println(o.isPresent()?o.get():"-");
+//
+//        Optional<String> name = Optional.ofNullable(p.getEnName());
+//        System.out.println(name.isPresent()?name.get():"-");
+//
+//        Optional.ofNullable("test").ifPresent(na->{
+//            System.out.println(na+" ifPresent");
+//        });
+//
+//        System.out.println(Optional.ofNullable(null).orElse("-"));
+//        System.out.println(Optional.ofNullable("1").orElse("-"));
+//
+//        boolean b = Optional.ofNullable(p).map(PersonModel::getEnName).isPresent();
+//        System.out.println(b);
 
     }
 
