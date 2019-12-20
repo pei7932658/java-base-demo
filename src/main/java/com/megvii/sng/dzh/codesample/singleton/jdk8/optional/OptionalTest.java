@@ -36,8 +36,8 @@ public class OptionalTest {
 
         //-------------------------------------------------------orElse orElseGet-------------------------------------------------------//
 //        User u = null;
-        User u = User.of("peter", 23);//构造方法
-        User user = Optional.ofNullable(u).orElse(createNewUser("orElse"));//当对象不为空时，orElse 里面的方法会调用
+//        User u = User.of("peter", 23);//构造方法
+//        User user = Optional.ofNullable(u).orElse(createNewUser("orElse"));//当对象不为空时，orElse 里面的方法会调用
 //        User user2 = Optional.ofNullable(u).orElseGet(()->createNewUser("orElseGet"));//当对象不为空时，orElseGet 不会调用
 
 
@@ -48,10 +48,10 @@ public class OptionalTest {
 
         //-------------------------------------------------------转换值 map flatMap filter-------------------------------------------------------//
 //        User u =null;
-//        User u = User.of("peter", 23);
-        //map 无限级联，可以往一直班下走
-//        String result = Optional.ofNullable(u).map(user -> user.getName()).map(name -> name.toUpperCase()).orElse("map");
-//        System.out.println(result);
+        User u = User.of("peter", 23);
+        //map 无限级联，可以往一直往下走
+        String result = Optional.ofNullable(u).map(user -> user.getName()).map(name -> name.toUpperCase()).orElse("map");
+        System.out.println(result);
 //
 //        String result2 = Optional.ofNullable(u).flatMap(user->user.getPosition()).orElse("flatMap");//flatMap 可以对Optional 进行解包
 //        System.out.println(result2);
