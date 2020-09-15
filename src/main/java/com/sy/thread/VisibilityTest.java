@@ -18,7 +18,8 @@ public class VisibilityTest extends Thread{
 	public boolean getStop(){
 		return stop;
 	}
-	
+
+	//相当于算出CPU一秒内，可以做多少次+法
 	public static void main(String[] args) throws InterruptedException {
 		VisibilityTest test = new VisibilityTest();
 		test.start();

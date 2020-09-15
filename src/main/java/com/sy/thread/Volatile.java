@@ -3,7 +3,10 @@ package com.sy.thread;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Volatile {
-	
+
+	/**
+	 * 所有Volatile实例，只有一份_longVal值，并且唯一，但不能保证原子操作
+	 */
 	private static volatile AtomicLong  _longVal = new AtomicLong(0);
 
 	private static class LoopVolatile implements Runnable {
