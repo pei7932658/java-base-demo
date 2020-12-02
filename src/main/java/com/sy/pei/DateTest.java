@@ -10,8 +10,8 @@ public class DateTest {
 	public static void main(String[] args) {
 		//datetest1();
 		//datetest2();
-		//  datetest3();
-//		  datetest4();
+		  datetest3();
+		  datetest4();
 	}
 	
 	public static void datetest1(){
