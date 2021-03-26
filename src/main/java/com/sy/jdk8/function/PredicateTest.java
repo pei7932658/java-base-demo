@@ -1,4 +1,4 @@
-package com.megvii.sng.dzh.codesample.singleton.jdk8.function;
+package com.sy.jdk8.function;
 
 import java.util.Arrays;
 import java.util.List;

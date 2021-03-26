@@ -1,4 +1,4 @@
-package com.megvii.sng.dzh.codesample.singleton.jdk8.optional;
+package com.sy.jdk8.optional;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

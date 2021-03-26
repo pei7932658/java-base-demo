@@ -1,9 +1,5 @@
-package com.megvii.sng.dzh.codesample.singleton.jdk8.optional;
+package com.sy.jdk8.optional;
 
-import lombok.Data;
-import org.junit.Assert;
-
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 /**

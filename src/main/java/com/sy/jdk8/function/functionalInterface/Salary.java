@@ -1,4 +1,4 @@
-package com.megvii.sng.dzh.codesample.singleton.jdk8.function.functionalInterface;
+package com.sy.jdk8.function.functionalInterface;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

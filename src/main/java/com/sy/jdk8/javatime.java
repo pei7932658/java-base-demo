@@ -1,4 +1,4 @@
-package com.megvii.sng.dzh.codesample.singleton.jdk8;
+package com.sy.jdk8;
 
 import org.apache.tomcat.jni.Local;
 

@@ -1,11 +1,10 @@
-package com.megvii.sng.dzh.codesample.singleton.jdk8.lambda;
+package com.sy.jdk8.lambda;
 
 import lombok.SneakyThrows;
 
 import java.io.*;
 import java.util.*;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;

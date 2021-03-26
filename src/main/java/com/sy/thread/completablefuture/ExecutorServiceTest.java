@@ -1,4 +1,4 @@
-package com.megvii.sng.dzh.codesample.singleton.jdk8.completablefuture;
+package com.sy.thread.completablefuture;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;

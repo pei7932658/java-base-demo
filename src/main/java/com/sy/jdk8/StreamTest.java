@@ -1,10 +1,6 @@
-package com.megvii.sng.dzh.codesample.singleton.jdk8;
-
-import com.sun.org.apache.xpath.internal.operations.Bool;
+package com.sy.jdk8;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * @Author:peiliang

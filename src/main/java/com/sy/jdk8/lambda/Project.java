@@ -1,4 +1,4 @@
-package com.megvii.sng.dzh.codesample.singleton.jdk8.lambda;
+package com.sy.jdk8.lambda;
 
 import lombok.Data;
 

@@ -1,17 +1,22 @@
-package com.megvii.sng.dzh.codesample.singleton.jdk8.completablefuture;
+package com.sy.thread.completablefuture;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ExecutionException;
+import java.util.function.Function;
 
 /**
- * @Author:peiliang
- * @Description: CompletableFuture 用法
- * 参考网址：https://www.cnblogs.com/fingerboy/p/9948736.html
- * @Date:2019/5/23 14:17
- * @Modified By:
+ * CompletableFuture 是jdk1.8 新增的功能
+ * https://www.jianshu.com/p/6bac52527ca4
  */
 public class CompletableFutureTest {
+
+    public static void main(String[] args) {
+//        runAsyncTest();
+//        thenSupplyAsyncTest();
+        //allOfAndanyOfTest();
+        applyToEitherTest();
+    }
 
     /**
      * 创建任务runAsync：无参数传入
@@ -20,7 +25,7 @@ public class CompletableFutureTest {
     public static void runAsyncTest() {
         System.out.println("主线程名称：" + Thread.currentThread().getName());
 
-        CompletableFuture future = CompletableFuture.runAsync(() -> {
+        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
             System.out.println("执行异步操作开始,线程名称:" + Thread.currentThread().getName());
 
 //            try {
@@ -46,7 +51,7 @@ public class CompletableFutureTest {
     }
 
     /**
-     * 创建任务supplyAsync:有参数传入
+     * 创建任务supplyAsync:有参数返回
      */
     public static void thenSupplyAsyncTest() {
         System.out.println("主线程名称：" + Thread.currentThread().getName());
@@ -68,9 +73,7 @@ public class CompletableFutureTest {
 //            String result = (String) future.get();
 //            System.out.println("返回结果:" + result);
 //
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        } catch (ExecutionException e) {
+//        } catch (InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
 
@@ -237,8 +240,15 @@ public class CompletableFutureTest {
         });
 
         //applyToEither的兄弟方法还有acceptEither(),runAfterEither(),我想不需要我解释你也知道该怎么用了
-        CompletableFuture<String> result = futureA.applyToEither(futureB, product -> "结果:" + product);
-        System.out.println(result.join());
+//        CompletableFuture<String> result = futureA.applyToEither(futureB, product -> "结果:" + product);
+        CompletableFuture<String> reuslt = futureA.applyToEither(futureB, new Function<String, String>() {
+            @Override
+            public String apply(String s) {
+                return "结果："+s;
+            }
+        });
+
+        System.out.println(reuslt.join());
     }
 
     /**
@@ -415,10 +425,6 @@ public class CompletableFutureTest {
         System.out.println(futureB.join());
 
         System.out.println("main end");
-    }
-
-    public static void main(String[] args) {
-        allOfAndanyOfTest();
     }
 
 }

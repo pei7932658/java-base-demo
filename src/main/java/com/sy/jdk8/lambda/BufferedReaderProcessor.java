@@ -1,7 +1,6 @@
-package com.megvii.sng.dzh.codesample.singleton.jdk8.lambda;
+package com.sy.jdk8.lambda;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.IOException;
 
 /**

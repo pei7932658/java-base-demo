@@ -1,8 +1,4 @@
-package com.megvii.sng.dzh.codesample.singleton.jdk8.function.functionalInterface;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
+package com.sy.jdk8.function.functionalInterface;
 
 /**
  * @Author:peiliang
