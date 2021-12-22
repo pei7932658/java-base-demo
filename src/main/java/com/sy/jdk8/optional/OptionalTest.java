@@ -1,6 +1,10 @@
 package com.sy.jdk8.optional;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @Author:peiliang
@@ -44,10 +48,10 @@ public class OptionalTest {
 
         //-------------------------------------------------------转换值 map flatMap filter-------------------------------------------------------//
 //        User u =null;
-        User u = User.of("peter", 23);
+//        User u = User.of("peter", 23);
         //map 无限级联，可以往一直往下走
-        String result = Optional.ofNullable(u).map(user -> user.getName()).map(name -> name.toUpperCase()).orElse("map");
-        System.out.println(result);
+//        String result = Optional.ofNullable(u).map(user -> user.getName()).map(name -> name.toUpperCase()).orElse("map");
+//        System.out.println(result);
 //
 //        String result2 = Optional.ofNullable(u).flatMap(user->user.getPosition()).orElse("flatMap");//flatMap 可以对Optional 进行解包
 //        System.out.println(result2);
@@ -57,10 +61,21 @@ public class OptionalTest {
 //        Assert.assertTrue(op.isPresent());
 //        System.out.println(op.get());
 
+        
+//        User u = null;
+        User u = User.of("peter", 23);
+        List<User> list = Stream.of(u).collect(Collectors.toList());
+        list.add(User.of("peter2", 123));
+        System.out.println(list);
+
+        //这里list 元素只能是一个，长度不可变，下面的add报错
+        List<User> list2 = Collections.singletonList(u);
+        list2.add(User.of("peter2",123));
+        System.out.println(list2);
     }
 
     private static User createNewUser(String method) {
-        System.out.println("Creating New User with method:"+method);
+        System.out.println("Creating New User with method:" + method);
         return User.of("extra@gmail.com", 12);
     }
 

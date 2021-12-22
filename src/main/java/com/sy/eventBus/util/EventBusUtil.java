@@ -55,6 +55,6 @@ public class EventBusUtil {
 
     public static void register(Object object) {
         getEventBus().register(object);
-        getAsynEventBus().register(object);
+        //getAsynEventBus().register(object);
     }
 }

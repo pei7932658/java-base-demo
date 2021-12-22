@@ -20,12 +20,12 @@ public class Main {
         EventListener2 listener2 = new EventListener2();
         CustomEvent customEvent = CustomEvent.of(23);
         EventBusUtil.register(listener1);
-        EventBusUtil.register(listener2);
+        //EventBusUtil.register(listener2);
 
 
         EventBusUtil.post(customEvent);
 
-//        EventBusUtil.asyncPost(customEvent);
+        EventBusUtil.asyncPost(customEvent);
 //        try {
 //            Thread.sleep(1*1000);
 //        } catch (InterruptedException e) {

@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Test {
@@ -32,7 +34,9 @@ public class Test {
 //		System.out.println(s);
 		
 		
-		testMap();
+		//testMap();
+
+		testCompile("41090000001200000110");
 	}
 	
 	public static String test1(String tradeDt, String tradeTm){
@@ -83,4 +87,12 @@ public class Test {
 		//sql.append(" AND user.type = "+data.getUsertype());
 		System.out.println(sql.toString());
     }
+
+	public static void testCompile(String str){
+		String pattern = "^[0-9]{10}[1][2][0][0-9]{7}$";
+
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(str);
+		System.out.println(m.matches());
+	}
 }
