@@ -1,4 +1,4 @@
-package com.megvii.sng.dzh.codesample.singleton.lombok;
+package com.sy.lombok;
 
 /**
  * @Author:peiliang
@@ -18,5 +18,11 @@ public class LomBokTest {
 
         User u4 = User.name("peter");
         System.out.println(u4);
+
+        //链式编程
+        Student student = new Student().setId(1).setName("peter").setAge(12);
+        Teacher teacher = Teacher.builder().id(2).name("张三").age(32).build();
+        System.out.println(student);
+        System.out.println(teacher);
     }
 }

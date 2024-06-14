@@ -36,7 +36,10 @@ public class Test {
 		
 		//testMap();
 
-		testCompile("41090000001200000110");
+		//testCompile("41090000001200000110");
+
+		System.out.println(String.valueOf(System.currentTimeMillis() / 1000));
+		System.out.println((new Date().getTime()+"").substring(0,10));
 	}
 	
 	public static String test1(String tradeDt, String tradeTm){

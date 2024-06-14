@@ -1,4 +1,4 @@
-package com.megvii.sng.dzh.codesample.singleton.lombok;
+package com.sy.lombok;
 
 import lombok.*;
 
