@@ -30,7 +30,7 @@ public class LambdaTest {
 //        Map<Integer, Project> map = list.stream().filter(project -> "1".equals(project.getSex())).collect(Collectors.toMap(Project::getId, project -> project));
 //        System.out.println(map);
 
-         //将list 对象中属性sex=1的，对象找出来， 然后转化成一个新 list
+        //将list 对象中属性sex=1的，对象找出来， 然后转化成一个新 list
 //        List<Project> newList = list.stream().filter(project -> "1".equals(project.getSex())).collect(Collectors.toList());
 //        System.out.println(newList);
 
@@ -57,7 +57,6 @@ public class LambdaTest {
 //        System.out.println(list2);
 
 
-
 //        ReadFile();
 
 //        testFunction();
@@ -74,19 +73,57 @@ public class LambdaTest {
 
 //        appleTest();
 
-        methodUse();
+//        methodUse();
 
         //将对象中的ID作为key，弄一个map 好判断对象合集中是否包含某个对应
 //        Map<Integer,Project> mapPorject = list.stream().collect(Collectors.toMap(Project::getId,o->o));
 //        Map<Integer,Project> mapPorject = list.stream().collect(Collectors.toMap(Project::getId,Function.identity()));
 //        System.out.println(mapPorject);
+
+
+        //**********Collectors 常见操作
+
+        //根据某个属性进行聚合 groupingBy 、 groupingBy之后再过滤分组里面的内容 、partitioningBy
+//        agg(list);
+
+        //Collectors.collectingAndThen 通常用于在收集操作之后执行一个额外的转换步骤，而不是用于过滤流中的元素。它的主要用途是在收集器完成其工作之后，对收集的结果执行一个函数，并返回该函数的结果。
+//        collectingAndThen(list);
+
+        //根据某个属性进行聚合之后，再sum某个值
+//        aggAndsum(list);
+
+        //根据某个属性进行聚合之后，再count某个值
+//        aggAndcount(list);
+
+        //求平均值
+//        averag(list);
+
+        //找到某个属性最大值或最小值的对应的Project
+//        maxAndMin(list);
+
+        //统计结果：summarizingDouble、summarizingInt、summarizingLong
+        //相当于：统计操作一般包含了计数、求平局、求和、最大、最小这几个，所以对于统计JDK也给出了一个方便的API。
+//        summarizingDouble(list);
+
+        //这个方法对String类型的元素进行聚合，拼接成一个字符串返回
+//        joining(list);
+
+        // 求和
+        reducing(list);
+
+        /**
+         * 通常应用：
+         * 1、对Person的年龄进行分组后，再操作取姓名后聚合为列表
+         * 2、分组后记数
+         * 3、分组后求和
+         */
     }
 
     public static List<Project> listInit() {
         List<Project> list = new ArrayList<Project>();
-        Project p1 = new Project(1, "peter", "1");
-        Project p2 = new Project(2, "hanmeimei", "0");
-        Project p3 = new Project(3, "jonni", "1");
+        Project p1 = new Project(1, "peter", "1", 234,103.45);
+        Project p2 = new Project(2, "hanmeimei", "0", 234,135.76);
+        Project p3 = new Project(3, "jonni", "1", 100,155d);
 
         list.add(p1);
         list.add(p2);
@@ -230,6 +267,114 @@ public class LambdaTest {
         BiFunction<String, Integer, Apple> f1 = Apple::new;
         Apple apple1 = f1.apply("green", 200);
         System.out.println(apple1);
+    }
+
+    public static void agg(List<Project> list) {
+        Map<String, List<Project>> projectBySex = list.stream().collect(Collectors.groupingBy(Project::getSex));
+        projectBySex.forEach((sex, projects) -> {
+            System.out.println("sex:" + sex);
+            projects.forEach(p -> System.out.println(p));
+        });
+
+        //按sex 分组，然后每个分组里面，再遍历list，再fiter 一些值
+        System.out.println("我是分隔线---------------------------");
+        Map<String, List<Project>> projectBySexAndFilter = list.stream()
+                .collect(Collectors.groupingBy(Project::getSex, Collectors.toList()))
+                .entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue().stream()
+                                .filter(p -> p.getValue() != null && p.getValue().intValue() > 100)
+                                .collect(Collectors.toList())
+                ));
+
+        projectBySexAndFilter.forEach((sex, projects) -> {
+            System.out.println("sex:" + sex);
+            projects.forEach(p -> System.out.println(p));
+        });
+        //partitioningBy与groupingBy的区别在于，partitioningBy借助Predicate断言，可以将集合元素分为true和false两部分。比如按照value是否大于 100分组：
+        System.out.println("我是分隔线---------------------------");
+        Map<Boolean,List<Project>> projectBySexAndpartitioning = list.stream()
+                .collect(Collectors.partitioningBy(p->p.getValue() !=null && p.getValue().intValue() >100));
+        projectBySexAndpartitioning.forEach((sex, projects) -> {
+            System.out.println("sex:" + sex);
+            projects.forEach(p -> System.out.println(p));
+        });
+    }
+
+    //这个用法跟下面的summingInt，效果一样
+    public static void collectingAndThen(List<Project> list) {
+        System.out.println("我是分隔线---------------------------");
+        Map<String, Integer> projectBySexAndFilter = list.stream().collect(
+                Collectors.groupingBy(
+                        Project::getSex,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),// 先收集到列表中
+                                item -> item.stream().mapToInt(Project::getValue).sum()// 将每个项目的值转换为 int
+
+                        )));
+        projectBySexAndFilter.forEach((sex, sumValue) -> {
+            System.out.println("sex:" + sex);
+            System.out.println("sumValue:" + sumValue);
+        });
+    }
+
+    public static void aggAndsum(List<Project> list) {
+        Map<String, Integer> projectBySex = list.stream().collect(Collectors.groupingBy(Project::getSex, Collectors.summingInt(Project::getId)));
+        projectBySex.forEach((sex, totalId) -> {
+            System.out.println("sex:" + sex + ",totalId:" + totalId);
+        });
+    }
+
+    public static void aggAndcount(List<Project> list) {
+        Map<String, Long> projectBySex = list.stream().collect(Collectors.groupingBy(Project::getSex, Collectors.counting()));
+        projectBySex.forEach((sex, totalId) -> {
+            System.out.println("sex:" + sex + ",totalId:" + totalId);
+        });
+    }
+
+    public static void averag(List<Project> list) {
+        Double d1 = list.stream().collect(Collectors.averagingDouble(Project::getValue));
+        Double i1 = list.stream().collect(Collectors.averagingInt(p -> p.getValue().intValue()));
+        Double l1 = list.stream().collect(Collectors.averagingLong(p -> p.getValue().intValue()));
+        System.out.println("averagingDouble:" + d1);
+        System.out.println("averagingInt:" + i1);
+        System.out.println("averagingLong:" + l1);
+    }
+
+    public static void maxAndMin(List<Project> list) {
+        Optional<Project> min = list.stream().collect(Collectors.minBy(Comparator.comparing(Project::getValue)));
+        System.out.println("min project:" + min.get());
+
+        Optional<Project> max = list.stream().collect(Collectors.maxBy(Comparator.comparing(Project::getValue)));
+        System.out.println("min project:" + max.get());
+    }
+
+    public static void summarizingDouble(List<Project> list) {
+        DoubleSummaryStatistics d = list.stream().collect(Collectors.summarizingDouble(Project::getValue));
+        System.out.println("summarizingDouble " + d.getAverage());
+        System.out.println("summarizingDouble " + d.getCount());
+        System.out.println("summarizingDouble " + d.getMax());
+        System.out.println("summarizingDouble " + d.getMin());
+        System.out.println("summarizingDouble " + d.getSum());
+    }
+
+    public static void joining(List<Project> list) {
+       String result1 = list.stream().map(Project::getName).collect(Collectors.joining());
+       String result2 = list.stream().map(Project::getName).collect(Collectors.joining(","));
+       String result3= list.stream().map(Project::getName).collect(Collectors.joining(",","【","】"));
+        System.out.println(result1);
+        System.out.println(result2);
+        System.out.println(result3);
+    }
+
+    public static void reducing(List<Project> list) {
+        Optional<Double> result1 = list.stream().map(Project::getWeight).collect(Collectors.reducing(Double::sum));
+        Double result2 = list.stream().collect(Collectors.reducing(0.0,Project::getWeight,Double::sum));
+        Double result3 = list.stream().map(Project::getWeight).collect(Collectors.reducing(0.0,Double::sum));
+        System.out.println(result1);
+        System.out.println(result2);
+        System.out.println(result3);
     }
 
 }
