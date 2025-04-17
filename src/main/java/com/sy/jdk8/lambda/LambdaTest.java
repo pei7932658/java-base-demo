@@ -56,6 +56,8 @@ public class LambdaTest {
 //        List<String> list2 = lists.stream().filter(s-> !StringUtils.isEmpty(s)).collect(Collectors.toList());
 //        System.out.println(list2);
 
+          Map<String,String> maps = initMap();
+
 
 //        ReadFile();
 
@@ -109,7 +111,7 @@ public class LambdaTest {
 //        joining(list);
 
         // 求和
-        reducing(list);
+        //reducing(list);
 
         /**
          * 通常应用：
@@ -148,6 +150,13 @@ public class LambdaTest {
         list.add(map3);
 
         return list;
+    }
+
+    private static Map<String,String> initMap(){
+        Map<String,String> maps = new HashMap<>();
+        maps.put("123","测试布控数据");
+        maps.put("456","测试布控数据2");
+        return maps;
     }
 
     public static void ReadFile() {
