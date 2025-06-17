@@ -20,12 +20,12 @@ public class Main {
         EventListener2 listener2 = new EventListener2();
         CustomEvent customEvent = CustomEvent.of(23);
         EventBusUtil.register(listener1);
-        //EventBusUtil.register(listener2);
+        EventBusUtil.register(listener2);
 
 
         EventBusUtil.post(customEvent);
 
-        EventBusUtil.asyncPost(customEvent);
+        //EventBusUtil.asyncPost(customEvent);
 //        try {
 //            Thread.sleep(1*1000);
 //        } catch (InterruptedException e) {
@@ -41,7 +41,7 @@ public class Main {
 
          2.事件发送方和事件消费方会在同一个线程中执行，消费方的执行线程取决于发送方。
 
-         3.同一个事件的多个订阅者，在接收到事件的顺序上面有不同。谁先注册到EventBus的，谁先执行，如果是在同一个类中的两个订阅者一起被注册到EventBus的情况，收到事件的顺序跟方法名有关。
+         3.同一个事件的多个订阅者，在接收到事件的顺序上面有不同。谁先注册到EventBus的，谁先执行，如果是在同一个类中的两个订阅者一起被注册到EventBus的情况，收到事件的顺序跟方法名有关。一般只有有一个方法
 
          AsyncEventBus:异步事件总线
 

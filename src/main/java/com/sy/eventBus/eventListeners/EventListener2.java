@@ -13,8 +13,18 @@ import java.time.Instant;
  */
 public class EventListener2 {
     @Subscribe
-    public void test(CustomEvent event) {
-        System.out.println(Instant.now() + ",监听者2,收到事件：" + event.getAge() + "，线程号为：" + Thread.currentThread().getName());
+    public void test2(CustomEvent event) {
+        System.out.println(Instant.now() + ",监听者2,方法1-->收到事件：" + event.getAge() + "，线程号为：" + Thread.currentThread().getName());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Subscribe
+    public void test1(CustomEvent event) {
+        System.out.println(Instant.now() + ",监听者2,方法2-->收到事件：" + event.getAge() + "，线程号为：" + Thread.currentThread().getName());
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
